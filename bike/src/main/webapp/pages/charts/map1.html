@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="/static/h-ui.admin/css/style.css"/>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GoWI7Di6IkLEjKkzWOXaoYGdW3zcYurG"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <title>热力图功能示例</title>
+</head>
+<body>
+<div  class="page-container" id="container" style="height:580px; width:100%;"></div>
+</body>
+</html>
+<script type="text/javascript">
+    var map = new BMap.Map("container");          // 创建地图实例
+    var point = new BMap.Point(104.184503, 30.826382);
+    map.centerAndZoom(point, 15);             // 初始化地图，设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(); // 允许滚轮缩放
+    var points =[
+        {"lng":114.118261,"lat":30.821984,"count":50},
+        {"lng":114.123332,"lat":30.816532,"count":51},
+        {"lng":114.119787,"lat":30.830658,"count":15},
+        {"lng":114.118455,"lat":30.820921,"count":40},
+        {"lng":114.118843,"lat":30.815516,"count":100},
+        {"lng":114.12546,"lat":30.818503,"count":6},
+        {"lng":114.123289,"lat":30.819989,"count":18},
+        {"lng":114.118162,"lat":30.815051,"count":80},
+        {"lng":114.122039,"lat":30.81782,"count":11},
+        {"lng":114.11387,"lat":30.817253,"count":7},
+        {"lng":114.11773,"lat":30.819426,"count":42},
+        {"lng":114.121107,"lat":30.816445,"count":4},
+        {"lng":114.117521,"lat":30.817943,"count":27},
+        {"lng":114.119812,"lat":30.820836,"count":23},
+        {"lng":114.120682,"lat":30.81463,"count":60},
+        {"lng":114.115424,"lat":30.824675,"count":8},
+        {"lng":114.119242,"lat":30.814509,"count":15},
+        {"lng":114.122766,"lat":30.821408,"count":25},
+        {"lng":114.121674,"lat":30.824396,"count":21},
+        {"lng":114.127268,"lat":30.82267,"count":1},
+        {"lng":114.117721,"lat":30.820034,"count":51},
+        {"lng":114.117721,"lat":30.820034,"count":51}];
+
+    if(!isSupportCanvas()){
+        alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
+    }
+
+    heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20});
+    map.addOverlay(heatmapOverlay);
+    heatmapOverlay.setDataSet({data:points,max:100});
+    heatmapOverlay.show();
+
+    //判断浏览区是否支持canvas
+    function isSupportCanvas(){
+        var elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+    }
+</script>
