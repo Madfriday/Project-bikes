@@ -27,3 +27,4 @@ shared bicycle project
 
 
 ![wexinbike](images/捕获.PNG "bikes")
+
